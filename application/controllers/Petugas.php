@@ -84,5 +84,17 @@ class Petugas extends CI_Controller{
         //mengalihkan halaman ke halaman data anggota
         redirect(base_url().'petugas/anggota');
     }
+
+    function anggota_edit($id){
+        $where = array(
+            'id' => $id
+        );
+
+        //mengambil data dari database sesuai id
+        $data['anggota'] = $this->m_data->edit_data($where,'anggota')->result();
+        $this->load->view('petugas/v_header');
+        $this->laod->view('petugas/v_anggota_edit',$data);
+        $this->laod->view('petugas/v_footer');
+    }
 }
 ?>
