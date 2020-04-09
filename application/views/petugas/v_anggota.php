@@ -31,8 +31,8 @@
                                 <td><?php echo $a->alamat; ?></td>
                                 <td>
                                     <a target="_blank" href="<?php echo base_url().'petugas/anggota_kartu/'.$a->id; ?>" class="btn btn-sm btn-primary"><i class="fa fa-address-card"></i> Cetak Kartu</a>
-                                    <a target="_blank" href="<?php echo base_url().'petugas/anggota_edit/'.$a->id; ?>" class="btn btn-sm btn-warning"><i class="fa fa-wrench"></i> Edit</a>
-                                    <a target="_blank" href="<?php echo base_url().'petugas/anggota_hapus/'.$a->id; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="<?php echo base_url().'petugas/anggota_edit/'.$a->id; ?>" class="btn btn-sm btn-warning"><i class="fa fa-wrench"></i> Edit</a>
+                                    <a href="<?php echo base_url().'petugas/anggota_hapus/'.$a->id; ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php }
