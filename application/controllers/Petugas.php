@@ -270,5 +270,55 @@ class Petugas extends CI_Controller{
         $this->m_data->update_data($w,$d,'buku');
         redirect(base_url().'petugas/peminjaman');
     }
+
+    function peminjaman_batalkan($id){
+        $where = array (
+            'peminjaman_id' => $id
+        );
+
+        //mengambil data buku pada peminjaman ber id tersebut
+        $data = $this->m_data->edit_data($where,'peminjaman')->row();
+        $buku = $data->peminjaman_buku;
+
+        //mengambilkan status buku kembali ke tersedia (1)
+        $w = array(
+            'id' => $buku
+        );
+        $d = array(
+            'status' => 1
+        );
+
+        $this->m_data->update_data($w,$d,'buku');
+
+        //menghapus data peminjaman dari database sesuai id
+        $this->m_data->delete_data($where,'peminjaman');
+        redirect(base_url().'petugas/peminjaman');
+    }
+
+    function peminjaman_selesai($id){
+        $where = array (
+            'peminjaman_id' => $id
+        );
+
+        //mengambil data buku pada peminjaman ber id tersebut
+        $data = $this->m_data->edit_data($where,'peminjaman')->row();
+        $buku = $data->peminjaman_buku;
+
+        //mengambilkan status buku kembali ke tersedia (1)
+        $w = array(
+            'id' => $buku
+        );
+        $d = array(
+            'status' => 1
+        );
+
+        $this->m_data->update_data($w,$d,'buku');
+
+        //menghapus data peminjaman dari database sesuai id
+        $this->m_data->update_data($where,array('peminjaman_status'=> 1),'peminjaman');
+        redirect(base_url().'petugas/peminjaman');
+    }
+
+    
 }
 ?>
