@@ -319,6 +319,38 @@ class Petugas extends CI_Controller{
         redirect(base_url().'petugas/peminjaman');
     }
 
+    function peminjaman_laporan(){
+        if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+
+            //mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal selesai
+            $data['peminjaman'] = $this->db->query("SELECT * from peminjaman,buku,anggota where peminjaman.peminjaman_buku=buku.id and peminjaman.peminjaman_anggota=anggota.id and date(peminjaman_tanggal_mulai) >= '$mulai' and date(peminjaman_tanggal_mulai) <= '$sampai' order by peminjaman_id desc")->result();
+        }else{
+            // mengambil data peminjaman buku dari database | dan mengurutkan data
+           
+            $data['peminjaman'] = $this->db->query("SELECT * from peminjaman,buku,anggota where peminjaman.peminjaman_buku=buku.id and peminjaman.peminjaman_anggota=anggota.id order by peminjaman_id desc")->result();
+            }
+
+            $this->load->view('petugas/v_header');
+            $this->load->view('petugas/v_peminjaman_laporan',$data);
+            $this->load->view('petugas/v_footer');
+    }
+
+    function peminjaman_cetak(){
+        if(isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])){
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+
+            //menggambil data peminjaman berdasarkan tanggal mulai sampai tanggal selesai
+
+            $data['peminjaman'] = $this->db->query("SELECT * from peminjaman,buku,anggota where peminjaman.peminjaman_buku=buku.id and peminjaman.peminjaman_anggota=anggota.id and date(peminjaman_tanggal_mulai) >='$mulai' and date(peminjaman_tanggal_mulai) <='$sampai' order by peminjaman_id desc")->result();
+            $this->load->view('petugas/v_peminjaman_cetak',$data);
+        }else{
+            redirect(base_url().'petugas/peminjaman');
+        }
+    }
+
     
 }
 ?>
