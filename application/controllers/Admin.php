@@ -156,5 +156,13 @@ class Admin extends CI_Controller{
         $this->load->view('admin/v_anggota_kartu',$data);
     }
 
+    //Menampilkan Data Buku
+    function buku(){
+        $data['buku'] = $this->m_data->get_data('buku')->result();
+        $this->load->view('admin/v_header');
+        $this->load->view('admin/v_buku',$data);
+        $this->load->view('admin/v_footer');
+    }
+
 }
 ?>
