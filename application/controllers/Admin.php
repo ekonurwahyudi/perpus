@@ -138,5 +138,23 @@ class Admin extends CI_Controller{
         redirect (base_url().'admin/petugas');
     }
 
+    //CRUD Anggota
+    function anggota(){
+        //mengambil data dari database
+        $data['anggota'] = $this->m_data->get_data('anggota')->result();
+        $this->load->view('admin/v_header');
+        $this->load->view('admin/v_anggota',$data);
+        $this->load->view('admin/v_footer');
+    }
+
+    function anggota_kartu($id){
+        $where = array(
+            'id' => $id
+        );
+
+        $data['anggota'] = $this->m_data->edit_data($where,'anggota')->result();
+        $this->load->view('admin/v_anggota_kartu',$data);
+    }
+
 }
 ?>
